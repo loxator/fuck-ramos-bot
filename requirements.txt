@@ -1,0 +1,6 @@
+chardet==3.0.4
+idna==2.7
+Pillow==5.1.0
+praw==6.0.0
+prawcore==1.0.0
+pymongo==3.7.2
