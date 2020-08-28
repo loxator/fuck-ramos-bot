@@ -46,7 +46,7 @@ def pushComments(comment_id, comments_records):
     comments_records.insert_one({"comment_id":comment_id})
 
 def setup_mongo_connection():
-    MONGO_URI = "mongodb://herokuWorker:test1234@ds249583.mlab.com:49583/comments"
+    MONGO_URI = "mongodb+srv://herokuWorker:test1234@cluster0.wsxnh.mongodb.net/comments?retryWrites=true&w=majority"
     client = MongoClient(MONGO_URI, connectTimeoutMS=30000)
     db = client.get_database("comments")
     return db.comment_records
