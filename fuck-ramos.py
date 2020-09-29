@@ -3,13 +3,16 @@ import config
 import time
 import re
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def bot_login():
     print ("Logging in...")
-    r = praw.Reddit(username = config.username,
-                    password = config.password,
-                    client_id = config.client_id,
-                    client_secret = config.client_secret,
+    r = praw.Reddit(username = os.environ.get('username'),
+                    password = os.environ.get('password'),
+                    client_id = os.environ.get('client_id'),
+                    client_secret = os.environ.get('client_secret'),
                     user_agent = "Made by u/loxator")
     print ("Logged in!")
 
