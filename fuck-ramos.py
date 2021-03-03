@@ -4,6 +4,7 @@ import re
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+import sys
 load_dotenv()
 
 def bot_login():
@@ -21,7 +22,11 @@ def bot_login():
 def run_bot(r, comment_records):
     print ("Searching last 1,000 comments")
     subreddit = r.subreddit('fuckramos+soccercirclejerk')
+    x=0
     for comment in subreddit.stream.comments():
+          x=x+1
+          if(x==100):
+              break
           if re.search('ramos', comment.body, re.IGNORECASE) and not re.search('(fuckramos)|(fuck ramos)|(fukramosbot)',comment.body,re.IGNORECASE) and getComment(comment.id,comment_records) is None and comment.author != r.user.me():
               print ("String with \"ramos\" found in comment " + comment.id)
               comment.reply("""the correct spelling is **Fuck Ramos**
@@ -34,9 +39,10 @@ def run_bot(r, comment_records):
 
     print(comment_records)
 
-    print ("Sleeping for 10 seconds...")
+    #print ("Sleeping for 10 seconds...")
     #Sleep for 10 seconds...
-    time.sleep(10)
+    #time.sleep(10)
+    
 
 
 
@@ -56,5 +62,5 @@ def setup_mongo_connection():
 comment_records = setup_mongo_connection()
 r = bot_login()
 
-while True:
-    run_bot(r, comment_records)
+
+run_bot(r, comment_records)
